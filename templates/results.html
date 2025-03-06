@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Результаты поиска</title>
+</head>
+<body>
+    <h1>Результаты поиска для "{{ query }}"</h1>
+    {% if results %}
+        <ul>
+        {% for result in results %}
+            <li>
+                <h2><a href="/page/{{ result[0] }}">{{ result[1] }}</a></h2>
+                <p><strong>Ключевые слова:</strong> {{ result[3] }}</p>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>Ничего не найдено.</p>
+    {% endif %}
+    <a href="/">Вернуться на главную</a>
+</body>
+</html>
