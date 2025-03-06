@@ -1,0 +1,113 @@
+/* Общие стили */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Courier New', monospace;
+    background: black;
+    color: limegreen;
+    overflow: hidden;
+}
+
+/* Хакерский фон */
+.hacker-background {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Эффект "матрицы" (падающие символы) */
+.hacker-background::before {
+    content: '';
+    position: absolute;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(transparent, limegreen, transparent);
+    animation: matrix 5s linear infinite;
+}
+
+@keyframes matrix {
+    0% {
+        top: -100%;
+    }
+    100% {
+        top: 100%;
+    }
+}
+
+/* Контейнер для поиска */
+.search-container {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    border: 2px solid limegreen;
+    box-shadow: 0 0 10px limegreen;
+    border-radius: 10px;
+}
+
+/* Заголовок с анимацией печати */
+.hacker-title {
+    font-size: 2.5rem;
+    text-shadow: 0 0 10px limegreen;
+    margin-bottom: 20px;
+    overflow: hidden;
+    white-space: nowrap;
+    animation: typing 3s steps(40, end);
+}
+
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+/* Форма поиска */
+.search-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Поле ввода с мигающим курсором */
+.search-input {
+    padding: 10px;
+    font-size: 1rem;
+    border: 2px solid limegreen;
+    background: black;
+    color: limegreen;
+    outline: none;
+    border-radius: 5px;
+    margin-right: 10px;
+    box-shadow: 0 0 5px limegreen;
+    caret-color: limegreen; /* Цвет курсора */
+}
+
+.search-input::placeholder {
+    color: limegreen;
+    opacity: 0.7;
+}
+
+/* Кнопка поиска */
+.search-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background: limegreen;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 0 5px limegreen;
+    transition: background 0.3s ease;
+}
+
+.search-button:hover {
+    background: #32cd32; /* Светло-зеленый */
+}
