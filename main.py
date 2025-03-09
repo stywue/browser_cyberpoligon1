@@ -18,7 +18,9 @@ def get_connection():
 def search_pages(query):
     conn = get_connection()
     cursor = conn.cursor()
-    cursor.execute('SELECT * FROM pages WHERE keywords LIKE %s', (f'%{query}%',))
+    search_pattern = f'%{query}%'
+    cursor.execute('''
+        SELECT * FROM pages WHERE title ILIKE %s OR content ILIKE %s OR keywords ILIKE %s;''', (search_pattern, search_pattern, search_pattern))
     results = cursor.fetchall()
     conn.close()
     return results
