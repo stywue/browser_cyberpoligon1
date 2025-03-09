@@ -1,22 +1,29 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Результаты поиска</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <h1>Результаты поиска для "{{ query }}"</h1>
-    {% if results %}
-        <ul>
-        {% for result in results %}
-            <li>
-                <h2><a href="/page/{{ result[0] }}">{{ result[1] }}</a></h2>
-                <p><strong>Ключевые слова:</strong> {{ result[3] }}</p>
-            </li>
-        {% endfor %}
-        </ul>
-    {% else %}
-        <p>Ничего не найдено.</p>
-    {% endif %}
-    <a href="/">Вернуться на главную</a>
+    <div class="hacker-background">
+        <div class="content-container">
+            <h1 class="hacker-title">Результаты поиска для "{{ query }}"</h1>
+            {% if results %}
+                <ul class="results-list">
+                {% for result in results %}
+                    <li>
+                        <h2><a href="/page/{{ result[0] }}" class="hacker-link">{{ result[1] }}</a></h2>
+                        <p><strong>Ключевые слова:</strong> {{ result[3] }}</p>
+                    </li>
+                {% endfor %}
+                </ul>
+            {% else %}
+                <p>Ничего не найдено.</p>
+            {% endif %}
+            <a href="/" class="hacker-link">Вернуться на главную</a>
+        </div>
+    </div>
 </body>
 </html>
