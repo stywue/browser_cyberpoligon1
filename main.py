@@ -5,10 +5,10 @@ app = Flask(__name__)
 
 # Параметры подключения к PostgreSQL
 DB_CONFIG = {
-    'dbname': 'mydatabase',  # Имя базы данных
-    'user': 'myuser',        # Имя пользователя
-    'password': 'mypassword', # Пароль
-    'host': 'localhost',     # Хост
+    'dbname': 'mydatabase',
+    'user': 'myuser',
+    'password': 'mypassword',
+    'host': 'localhost',
     'port': 5432
 }
 
@@ -18,9 +18,12 @@ def get_connection():
 def search_pages(query):
     conn = get_connection()
     cursor = conn.cursor()
-    search_pattern = f'%{query}%'
-    cursor.execute('''
-        SELECT * FROM pages WHERE title ILIKE %s OR content ILIKE %s OR keywords ILIKE %s;''', (search_pattern, search_pattern, search_pattern))
+    cursor.execute("""
+        SELECT id, title, snippet
+        FROM pages
+        WHERE search_vector @@ plainto_tsquery('russian', %s)
+        ORDER BY ts_rank(search_vector, plainto_tsquery('russian', %s)) DESC;
+    """, (query, query))
     results = cursor.fetchall()
     conn.close()
     return results
@@ -37,9 +40,9 @@ def get_page_by_id(page_id):
 def index():
     return render_template('index.html')
 
-@app.route('/search', methods=['GET'])
+@app.route('/search')
 def search():
-    query = request.args.get('query')  # Получаем поисковый запрос из URL
+    query = request.args.get('query')
     if query:
         results = search_pages(query)
         return render_template('results.html', results=results, query=query)
