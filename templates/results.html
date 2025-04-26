@@ -1,29 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Результаты поиска</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <div class="hacker-background">
-        <div class="content-container">
-            <h1 class="hacker-title">Результаты поиска для "{{ query }}"</h1>
-            {% if results %}
-                <ul class="results-list">
+    <div class="search-container">
+        <form action="/search" method="GET" class="search-form">
+            <input type="text" name="query" value="{{ query }}" class="search-input" placeholder="Введите ключевое слово">
+            <button type="submit" class="search-button">search</button>
+        </form>
+    </div>
+
+    <div class="content-container">
+        {% if results %}
+            <ul class="results-list">
                 {% for result in results %}
-                    <li>
-                        <h2><a href="/page/{{ result[0] }}" class="hacker-link">{{ result[1] }}</a></h2>
-                        <p><strong>Ключевые слова:</strong> {{ result[3] }}</p>
-                    </li>
+                <li>
+                    <h2><a class="hacker-link" href="{{ url_for('show_page', page_id=result[0]) }}">{{ result[1] }}</a></h2>
+                    {% if result[3] %}
+                        <p>{{ result[3] }}</p>
+                    {% endif %}
+                </li>
                 {% endfor %}
-                </ul>
-            {% else %}
-                <p>Ничего не найдено.</p>
-            {% endif %}
-            <a href="/" class="hacker-link">Вернуться на главную</a>
-        </div>
+            </ul>
+        {% else %}
+            <p>Ничего не найдено.</p>
+        {% endif %}
     </div>
 </body>
 </html>
