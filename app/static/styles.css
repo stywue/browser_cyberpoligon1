@@ -31,6 +31,10 @@ body, html {
 .google-logo span:nth-child(4) { color: #4285f4; } /* E */
 .google-logo span:nth-child(5) { color: #34a853; } /* R */
 .google-logo span:nth-child(6) { color: #ea4335; } /* ! */
+.google-logo span:nth-child(7) { color: #fbbc05; } /* E */
+.google-logo span:nth-child(8) { color: #4285f4; } /* R */
+.google-logo span:nth-child(9) { color: #ea4335; } /* ! */
+
 
 /* Поисковая форма */
 .search-box {
@@ -84,4 +88,78 @@ body, html {
         width: 100%;
         text-align: center;
     }
+}
+.content-container {
+    padding: 20px;
+}
+
+.top-bar {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    gap: 20px;
+}
+
+/* Логотип OSINT */
+.osint-logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #4285f4;
+    text-decoration: none;
+    padding: 6px 12px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+
+/* Уточнение для search-box внутри top-bar */
+.top-bar .search-box {
+    flex: 1;
+    max-width: 600px;
+}
+
+.hacker-link {
+    color: #1a0dab;
+    text-decoration: underline;
+    font-size: 14px;
+    word-break: break-all;
+}
+.results-list {
+    list-style: none;
+    padding: 0 20px;
+    margin: 20px 0;
+    max-width: 800px;
+}
+
+.result-card {
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #fafafa;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.result-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.result-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #202124;
+}
+
+.result-link {
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #1a0dab;
+    word-break: break-all;
+}
+
+.result-snippet {
+    font-size: 15px;
+    color: #4d5156;
 }
