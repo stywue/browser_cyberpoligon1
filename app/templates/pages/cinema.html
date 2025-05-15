@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главные кинопремьеры | Cinema Vision</title>
+    <style>
+        :root {
+            --primary: #d32f2f;
+            --secondary: #f44336;
+            --accent: #ffc107;
+            --dark: #212121;
+            --light: #f5f5f5;
+        }
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: var(--light);
+        }
+        header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 25px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        h1 {
+            margin: 0;
+            font-size: 2.4rem;
+            letter-spacing: 1px;
+        }
+        .subtitle {
+            font-size: 1.1rem;
+            margin-top: 10px;
+            opacity: 0.9;
+        }
+        h2 {
+            color: var(--primary);
+            margin-top: 35px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--accent);
+        }
+        .article {
+            background: white;
+            padding: 25px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+        .article-img {
+            width: 100%;
+            border-radius: 6px;
+            margin: 20px 0;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .tag {
+            display: inline-block;
+            background: var(--accent);
+            color: #333;
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 0.85rem;
+            margin-right: 10px;
+            font-weight: 500;
+        }
+        .highlight {
+            background: #ffebee;
+            padding: 15px;
+            border-left: 4px solid var(--primary);
+            margin: 20px 0;
+            font-style: italic;
+        }
+        .movie-info {
+            display: flex;
+            gap: 15px;
+            margin: 15px 0;
+            font-size: 0.9rem;
+        }
+        .movie-info span {
+            display: flex;
+            align-items: center;
+        }
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Cinema Vision</h1>
+        <div class="subtitle">Самые ожидаемые фильмы года</div>
+    </header>
+
+    <div class="article">
+        <h2>Новый фильм Кристофера Нолана "Оппенгеймер" выходит в июле</h2>
+        <div>
+            <span class="tag">Драма</span>
+            <span class="tag">Биография</span>
+            <span class="tag">Исторический</span>
+        </div>
+        
+        <div class="movie-info">
+            <span>📅 20 июля 2023</span>
+            <span>⏱️ 180 минут</span>
+            <span>⭐ 9.1/10 (IMDb)</span>
+        </div>
+        
+        <img src="https://example.com/images/oppenheimer.jpg" alt="Кадр из фильма Оппенгеймер" class="article-img">
+        
+        <p>Кристофер Нолан представляет эпическую драму о создателе атомной бомбы Роберте Оппенгеймере. Главную роль исполняет Киллиан Мерфи, а в звездный состав также вошли Эмили Блант, Роберт Дауни-мл. и Мэтт Деймон.</p>
+        
+        <div class="highlight">
+            "Это мой самый амбициозный проект. Мы снимали на настоящей IMAX-пленке и воссоздали первые испытания ядерной бомбы без использования компьютерной графики", — заявил Нолан.
+        </div>
+        
+        <h3>Интересные факты:</h3>
+        <ul>
+            <li>Первый R-рейтинговый фильм Нолана за последние 20 лет</li>
+            <li>Съемки велись в реальных локациях, включая Лос-Аламос</li>
+            <li>Саундтрек написал Людвиг Йоранссон</li>
+            <li>Фильм полностью снят на IMAX-камеры</li>
+        </ul>
+    </div>
+
+    <h2>Другие кинопремьеры</h2>
+    
+    <div class="article">
+        <h3>Мартин Скорсезе представляет "Убийцы цветочной луны"</h3>
+        <div>
+            <span class="tag">Криминал</span>
+            <span class="tag">Драма</span>
+        </div>
+        <p>Леонардо ДиКаприо и Роберт Де Ниро в новой исторической драме о серии убийств в стране Осейдж...</p>
+    </div>
+    
+    <div class="article">
+        <h3>Фильм "Барби" с Марго Робби и Райаном Гослингом</h3>
+        <div>
+            <span class="tag">Комедия</span>
+            <span class="tag">Фэнтези</span>
+        </div>
+        <p>Неожиданный взгляд на культовую куклу в новой эксцентричной комедии от режиссера Греты Гервиг...</p>
+    </div>
+
+    <footer>
+        <p>© 2023 Cinema Vision. Все права защищены.</p>
+    </footer>
+</body>
+</html>
+

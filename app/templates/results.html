@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Результаты поиска</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="top-bar">
+        <a href="/" class="osint-logo">OSINT MOD</a>
+        <div class="search-box">
+            <form action="/search" method="GET" class="search-form">
+                <input type="text" name="query" class="search-input" placeholder="Введите запрос">
+                <button type="submit" class="search-button">Поиск</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="content-container">
+        {% if results %}
+            <ul class="results-list">
+                {% for result in results %}
+                <li class="result-card">
+                    <h2 class="result-title">{{ result[1] }}</h2>
+                    <p class="result-link">
+                        <a class="hacker-link" href="{{ url_for('show_custom_page', page_name=result[0]) }}">
+                            {{ "http://127.0.0.1" + url_for('show_custom_page', page_name=result[0]) }}
+                        </a>
+                    </p>
+                    {% if result[2] %}
+                        <p class="result-snippet">{{ result[2] }}</p>
+                    {% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Ничего не найдено.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

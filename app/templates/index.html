@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CYBERPOLIGON</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="google-container">
+        <div class="google-logo">
+            <span>O</span><span>S</span><span>I</span><span>N</span><span>T</span><span> </span><span>M</span><span>O</span><span>D</span>
+        </div>
+        <div class="search-box">
+            <form action="/search" method="GET" class="search-form">
+                <input type="text" name="query" class="search-input" placeholder="Введите запрос">
+                <button type="submit" class="search-button">Поиск</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
