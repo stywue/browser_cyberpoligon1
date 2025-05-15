@@ -1,0 +1,125 @@
+import os
+import psycopg2
+import os
+from bs4 import BeautifulSoup
+from flask import Flask, render_template, request
+
+app = Flask(__name__)
+
+DB_CONFIG = {
+    'dbname': os.environ.get('DB_NAME', 'mydb'),
+    'user': os.environ.get('DB_USER', 'myuser'),
+    'password': os.environ.get('DB_PASSWORD', 'mypass'),
+    'host': os.environ.get('DB_HOST', 'db'),
+    'port': os.environ.get('DB_PORT', 5432)
+}
+
+def get_connection():
+    return psycopg2.connect(**DB_CONFIG)
+
+def init_db():
+    pages = collect_pages_from_templates()
+
+    conn = get_connection()
+    cursor = conn.cursor()
+    for p in pages:
+        cursor.execute("""
+        INSERT INTO pages (page_name, title, content, snippet)
+        VALUES (%s, %s, %s, %s)
+        ON CONFLICT (snippet) DO UPDATE 
+        SET title = EXCLUDED.title,
+            content = EXCLUDED.content,
+            search_vector = to_tsvector('russian', EXCLUDED.title || ' ' || EXCLUDED.content)
+        """, (p['page_name'], p['title'], p['content'], p['snippet']))
+    conn.commit()
+    conn.close()
+
+
+    conn.close()
+    print("✅ База данных инициализирована.")
+
+def search_pages(query):
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("""
+        SELECT page_name, title, snippet
+        FROM pages
+        WHERE search_vector @@ plainto_tsquery('russian', %s)
+        ORDER BY ts_rank(search_vector, plainto_tsquery('russian', %s)) DESC;
+    """, (query, query))
+    results = cursor.fetchall()
+    conn.close()
+    return results
+
+
+def get_page_by_id(page_id):
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute('SELECT * FROM pages WHERE id = %s', (page_id,))
+    page = cursor.fetchone()
+    conn.close()
+    return page
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+@app.route('/search')
+def search():
+    query = request.args.get('query')
+    if query:
+        results = search_pages(query)
+        return render_template('results.html', results=results, query=query)
+    return "Введите поисковый запрос", 400
+
+
+@app.route('/page/<int:page_id>')
+def show_page(page_id):
+    page = get_page_by_id(page_id)
+    if page:
+        return render_template('page.html', title=page[1], content=page[2])
+    return "Страница не найдена", 404
+
+@app.route('/pages/<page_name>')
+def show_custom_page(page_name):
+    try:
+        return render_template(f'pages/{page_name}.html')
+    except TemplateNotFound:
+        abort(404)
+
+
+def collect_pages_from_templates():
+    pages_dir = os.path.join(app.root_path, 'templates', 'pages')
+    page_files = [
+        f for f in os.listdir(pages_dir)
+        if f.endswith('.html')  
+    ]
+    pages = []
+    for filename in page_files:
+        path = os.path.join(pages_dir, filename)
+        with open(path, 'r', encoding='utf-8') as f:
+            soup = BeautifulSoup(f, 'html.parser')
+            title_tag = soup.title or soup.find('h1')
+            title = title_tag.get_text(strip=True) if title_tag else filename[:-5]
+
+            content = soup.get_text(separator=' ', strip=True)
+
+            snippet = title
+            page_name = filename[:-5]
+            pages.append({
+                'page_name': page_name,
+                'title': title,
+                'content': content,
+                'snippet': snippet
+            })
+    return pages
+
+
+if __name__ == '__main__':
+    
+    try:
+        init_db()
+    except Exception as e:
+        print(f"Ошибка при инициализации БД: {e}")
+    
+    app.run(debug=True, host='0.0.0.0', port=5000)
