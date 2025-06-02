@@ -1,23 +1,45 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Результаты поиска</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
 </head>
 <body>
-    <div class="top-bar">
-        <a href="/" class="osint-logo">OSINT MOD</a>
-        <div class="search-box">
-            <form action="/search" method="GET" class="search-form">
-                <input type="text" name="query" class="search-input" placeholder="Введите запрос">
-                <button type="submit" class="search-button">Поиск</button>
-            </form>
-        </div>
-    </div>
+    <header class="search-header">
+        <form action="/search" method="GET" class="search-form">
+            <button type="submit" class="yandex-logo" aria-label="Yandex"></button>
+            <input
+                type="text"
+                name="query"
+                class="search-input"
+                placeholder="Найдётся всё"
+                value="{{ query }}"
+                autocomplete="off"
+            />
+            <button type="button" class="clear-button" aria-label="Clear search input">×</button>
+            <button type="submit" class="search-button">Найти</button>
+            <button type="button" class="voice-search" aria-label="Voice search"></button>
+            <button type="button" class="camera-search" aria-label="Camera search"></button>
+        </form>
+        <nav class="search-tabs" role="navigation" aria-label="Search categories">
+            <ul>
+                <li class="active"><a href="#">поиск</a></li>
+                <li><a href="#">алиса</a></li>
+                <li><a href="#">картинки</a></li>
+                <li><a href="#">видео</a></li>
+                <li><a href="#">карты</a></li>
+                <li><a href="#">товары</a></li>
+                <li><a href="#">финансы</a></li>
+                <li><a href="#">квартиры</a></li>
+                <li><a href="#">переводчик</a></li>
+                <li><a href="#">все</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <div class="content-container">
+    <main class="content-container">
         {% if results %}
             <ul class="results-list">
                 {% for result in results %}
@@ -37,6 +59,6 @@
         {% else %}
             <p>Ничего не найдено.</p>
         {% endif %}
-    </div>
+    </main>
 </body>
 </html>

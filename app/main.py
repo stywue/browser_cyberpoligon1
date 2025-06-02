@@ -1,8 +1,9 @@
 import os
 import psycopg2
-import os
+import requests
 from bs4 import BeautifulSoup
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, abort
+from jinja2 import TemplateNotFound
 
 app = Flask(__name__)
 
@@ -13,6 +14,11 @@ DB_CONFIG = {
     'host': os.environ.get('DB_HOST', 'db'),
     'port': os.environ.get('DB_PORT', 5432)
 }
+
+WEATHER_API_KEY = os.environ.get('WEATHER_API_KEY', 'your_openweathermap_api_key')
+WEATHER_CITY = 'Saint Petersburg'
+WEATHER_UNITS = 'metric'
+WEATHER_LANG = 'ru'
 
 def get_connection():
     return psycopg2.connect(**DB_CONFIG)
@@ -34,8 +40,6 @@ def init_db():
     conn.commit()
     conn.close()
 
-
-    conn.close()
     print("✅ База данных инициализирована.")
 
 def search_pages(query):
@@ -51,7 +55,6 @@ def search_pages(query):
     conn.close()
     return results
 
-
 def get_page_by_id(page_id):
     conn = get_connection()
     cursor = conn.cursor()
@@ -60,33 +63,59 @@ def get_page_by_id(page_id):
     conn.close()
     return page
 
+def fetch_weather():
+    # Removed dynamic weather fetching, replaced with static data
+    return {
+        'temp': 17,
+        'description': 'Облачно',
+        'icon': 'http://openweathermap.org/img/wn/03d@2x.png'
+    }
+
 @app.route('/')
 def index():
-    return render_template('index.html')
+    weather = {
+        'temp': 17,
+        'description': 'Облачно',
+        'icon': 'http://openweathermap.org/img/wn/03d@2x.png'
+    }
+    return render_template('index.html', weather=weather)
 
 @app.route('/search')
 def search():
     query = request.args.get('query')
+    weather = {
+        'temp': 17,
+        'description': 'Облачно',
+        'icon': 'http://openweathermap.org/img/wn/03d@2x.png'
+    }
     if query:
         results = search_pages(query)
-        return render_template('results.html', results=results, query=query)
+        return render_template('results.html', results=results, query=query, weather=weather)
     return "Введите поисковый запрос", 400
-
 
 @app.route('/page/<int:page_id>')
 def show_page(page_id):
+    weather = {
+        'temp': 17,
+        'description': 'Облачно',
+        'icon': 'http://openweathermap.org/img/wn/03d@2x.png'
+    }
     page = get_page_by_id(page_id)
     if page:
-        return render_template('page.html', title=page[1], content=page[2])
+        return render_template('page.html', title=page[1], content=page[2], weather=weather)
     return "Страница не найдена", 404
 
 @app.route('/pages/<page_name>')
 def show_custom_page(page_name):
+    weather = {
+        'temp': 17,
+        'description': 'Облачно',
+        'icon': 'http://openweathermap.org/img/wn/03d@2x.png'
+    }
     try:
-        return render_template(f'pages/{page_name}.html')
+        return render_template(f'pages/{page_name}.html', weather=weather)
     except TemplateNotFound:
         abort(404)
-
 
 def collect_pages_from_templates():
     pages_dir = os.path.join(app.root_path, 'templates', 'pages')
@@ -114,9 +143,7 @@ def collect_pages_from_templates():
             })
     return pages
 
-
 if __name__ == '__main__':
-    
     try:
         init_db()
     except Exception as e:

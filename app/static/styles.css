@@ -1,165 +1,152 @@
-/* Общие стили */
+/* Reset and base styles */
 body, html {
     margin: 0;
     padding: 0;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
     height: 100%;
-    font-family: Arial, sans-serif;
-    background: white;
-    color: black;
 }
 
-/* Главный контейнер */
-.google-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
-/* Стили логотипа CYBER */
-.google-logo {
-    font-size: 64px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    letter-spacing: -2px;
-}
-
-.google-logo span:nth-child(1) { color: #4285f4; } /* C */
-.google-logo span:nth-child(2) { color: #ea4335; } /* Y */
-.google-logo span:nth-child(3) { color: #fbbc05; } /* B */
-.google-logo span:nth-child(4) { color: #4285f4; } /* E */
-.google-logo span:nth-child(5) { color: #34a853; } /* R */
-.google-logo span:nth-child(6) { color: #ea4335; } /* ! */
-.google-logo span:nth-child(7) { color: #fbbc05; } /* E */
-.google-logo span:nth-child(8) { color: #4285f4; } /* R */
-.google-logo span:nth-child(9) { color: #ea4335; } /* ! */
-
-
-/* Поисковая форма */
-.search-box {
-    width: 100%;
-    max-width: 500px;
+/* Search header styles */
+.search-header {
+    padding: 20px 30px;
+    background-color: #fff;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
 }
 
 .search-form {
     display: flex;
-    border: 1px solid #dfe1e5;
-    border-radius: 24px;
-    padding: 5px 10px;
-    box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
+    align-items: center;
+    gap: 10px;
+    max-width: 700px;
+    margin: 0 auto 20px auto;
+}
+
+.yandex-logo {
+    width: 32px;
+    height: 32px;
+    background-image: url('../images/yandex-logo.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
 }
 
 .search-input {
     flex: 1;
-    border: none;
-    font-size: 16px;
-    padding: 10px;
+    border: 1px solid #dfe1e5;
+    border-radius: 20px;
+    padding: 10px 15px;
+    font-size: 18px;
     outline: none;
+    background-color: #f7f7f7;
+}
+
+.clear-button {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #999;
+}
+
+.clear-button:hover {
+    color: #666;
 }
 
 .search-button {
-    background: none;
+    background-color: #ff0000;
     border: none;
-    color: #4285f4;
+    color: white;
     font-weight: bold;
-    font-size: 16px;
+    padding: 10px 20px;
+    border-radius: 20px;
     cursor: pointer;
-    padding: 0 10px;
+    transition: background-color 0.3s ease;
 }
 
 .search-button:hover {
-    text-decoration: underline;
+    background-color: #cc0000;
 }
 
-/* Адаптивность */
-@media (max-width: 600px) {
-    .google-logo {
-        font-size: 48px;
-    }
-
-    .search-form {
-        flex-direction: column;
-        gap: 10px;
-        padding: 10px;
-    }
-
-    .search-button {
-        width: 100%;
-        text-align: center;
-    }
-}
-.content-container {
-    padding: 20px;
+.voice-search, .camera-search {
+    width: 28px;
+    height: 28px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
 }
 
-.top-bar {
+.voice-search {
+    background-image: url('../images/voice.svg');
+}
+
+.camera-search {
+    background-image: url('../images/camera.svg');
+}
+
+.search-tabs {
+    max-width: 700px;
+    margin: 0 auto 30px auto;
+    border-bottom: 1px solid #ddd;
+}
+
+.search-tabs ul {
+    list-style: none;
     display: flex;
-    align-items: center;
-    padding: 20px;
     gap: 20px;
+    padding: 0;
+    margin: 0;
 }
 
-/* Логотип OSINT */
-.osint-logo {
-    font-size: 24px;
-    font-weight: bold;
-    color: #4285f4;
+.search-tabs li {
+    padding: 10px 0;
+}
+
+.search-tabs li a {
     text-decoration: none;
-    padding: 6px 12px;
-    transition: background-color 0.2s, color 0.2s;
-}
-
-
-/* Уточнение для search-box внутри top-bar */
-.top-bar .search-box {
-    flex: 1;
-    max-width: 600px;
-}
-
-.hacker-link {
-    color: #1a0dab;
-    text-decoration: underline;
+    color: #444;
+    font-weight: 600;
     font-size: 14px;
-    word-break: break-all;
 }
+
+.search-tabs li.active a {
+    border-bottom: 2px solid #ff0000;
+    color: #ff0000;
+}
+
+.content-container {
+    max-width: 900px;
+    margin: 0 auto 40px auto;
+    padding: 0 20px;
+}
+
 .results-list {
     list-style: none;
-    padding: 0 20px;
-    margin: 20px 0;
-    max-width: 800px;
+    padding: 0;
+    margin: 0;
 }
 
 .result-card {
-    border: 1px solid #ddd;
-    border-radius: 12px;
-    padding: 20px;
     margin-bottom: 20px;
-    background-color: #fafafa;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.result-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .result-title {
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 8px;
-    color: #202124;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #1a0dab;
 }
 
-.result-link {
-    margin-bottom: 10px;
+.result-link a {
+    color: #006621;
     font-size: 14px;
-    color: #1a0dab;
-    word-break: break-all;
+    text-decoration: none;
 }
 
 .result-snippet {
-    font-size: 15px;
-    color: #4d5156;
+    font-size: 14px;
+    color: #545454;
 }
