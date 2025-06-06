@@ -7,53 +7,96 @@
     <link rel="stylesheet" href="/static/styles.css" />
 </head>
 <body>
-    <div class="logo-container" style="text-align: center; margin: 30px 0;">
-        <img src="/static/images/yandex_browser_logo_big.png" alt="Yandex Browser" style="max-width: 300px; height: auto;" />
+    <!-- Top news ticker -->
+    <div class="news-ticker">
+        <div class="news-ticker-left">
+            <a href="#" class="news-link">Сейчас в СМИ</a>
+            <span>в Пензе</span>
+            <ul class="news-list">
+                <li><a href="#">В НАТО раскрыли детали готовящегося «пакета мер» в Черном море</a></li>
+                <li><a href="#">В России отменили бумажный СНИЛС</a></li>
+                <li><a href="#">В Донбассе убита пулеметчица ВСУ с позывным «Ведьма»</a></li>
+                <li><a href="#">Россияне назвали необходимый для жизни минимальный доход</a></li>
+                <li><a href="#">В Петербурге в академии имени Можайского произошел взрыв</a></li>
+            </ul>
+        </div>
+        <div class="news-ticker-right">
+            <span>3 апреля, среда 08:21</span>
+        </div>
     </div>
-    <header class="search-header" style="margin-top: 20px;">
-        <form action="/search" method="GET" class="search-form" style="max-width: 600px; margin: 0 auto; display: flex; gap: 10px;">
+
+    <!-- Currency info bar -->
+    <div class="currency-bar">
+        <span>USD MOEX <span class="green">65,31 +0,14</span></span>
+        <span>EUR MOEX <span class="green">73,17 +0,09</span></span>
+        <span>НЕФТЬ <span class="green">69,40 +0,33%</span></span>
+    </div>
+
+    <!-- Main header with logo and navigation -->
+    <header class="main-header">
+        <div class="logo">
+            <span class="logo-red">Я</span><span class="logo-black">ндекс</span>
+        </div>
+        <nav class="nav-menu">
+            <ul>
+                <li><a href="#">Видео</a></li>
+                <li><a href="#">Картинки</a></li>
+                <li><a href="#">Новости</a></li>
+                <li><a href="#">Карты</a></li>
+                <li><a href="#">Маркет</a></li>
+                <li><a href="#">Переводчик</a></li>
+                <li><a href="#">Музыка</a></li>
+                <li><a href="#">Эфир</a></li>
+                <li><a href="#">ещё</a></li>
+            </ul>
+        </nav>
+        <div class="make-yandex">
+            <a href="#">Сделать Яндекс<br/><small>основным поиском<br/>и стартовой страницей</small></a>
+        </div>
+    </header>
+
+    <!-- Search form -->
+    <section class="search-section">
+        <form action="/search" method="GET" class="search-form">
             <input
                 type="text"
                 name="query"
                 class="search-input"
-                placeholder="Найдётся всё"
+                placeholder="Найдётся всё. Например, самый первый компьютер в мире"
                 autocomplete="off"
-                style="flex: 1; padding: 10px 15px; font-size: 18px; border-radius: 25px; border: 1px solid #ccc;"
             />
-            <button type="submit" class="search-button" style="background-color: #ff0000; color: white; border: none; border-radius: 25px; padding: 10px 25px; font-weight: bold; cursor: pointer;">
-                Найти
-            </button>
+            <!-- Removed empty transparent buttons for keyboard and microphone -->
+            <button type="submit" class="search-button">Найти</button>
         </form>
-    </header>
+    </section>
 
-    <main class="content-container" style="display: flex; justify-content: center; margin-top: 20px;">
-        <div class="bottom-info-bar" style="display: flex; align-items: center; gap: 20px; font-size: 14px; color: #444;">
-            <div class="weather" style="display: flex; align-items: center; gap: 5px;">
-                <span class="weather-icon">☁️</span>
-                <span class="weather-temp">+17°</span>
-                <span class="weather-desc">Облачно</span>
-            </div>
-            <div class="currency" style="display: flex; align-items: center; gap: 15px;">
-                <span>USD 78,62</span>
-                <span>EUR 89,25</span>
-                <span>YDEX 4146,50</span>
-            </div>
-            <div class="user-icons" style="display: flex; align-items: center; gap: 15px;">
-                <div class="icon user-profile" title="Профиль"></div>
-                <div class="icon apps" title="Приложения"></div>
-                <div class="icon mail" title="Почта"></div>
-                <div class="icon cart" title="Корзина"></div>
-            </div>
+    <!-- Advertisement banner -->
+    <section class="advertisement-banner">
+        <div class="ad-text">
+            <strong>Курс веб-пентест для специалистов ИБ + Kubernetes</strong><br/>
+            <a href="https://practicum.yandex.ru" target="_blank" rel="noopener noreferrer">practicum.yandex.ru</a> <span>РЕКЛАМА · 16+</span>
         </div>
-    </main>
-    <section class="advertisement-banner" style="max-width:900px; margin: 0 auto 40px auto; padding: 10px; background-color: #f4c7b8; border-radius: 8px; display: flex; align-items: center; gap: 10px;">
-        <div style="flex: 1;">
-            <strong style="font-size: 18px; color: #7f2a00;">Курс веб-пентест для специалистов ИБ + Kubernetes</strong><br/>
-            <a href="https://practicum.yandex.ru" style="color: #7f2a00; text-decoration: none; font-size: 14px;">practicum.yandex.ru</a> <span style="font-size: 12px; color: #7f2a00;">РЕКЛАМА · 16+</span>
-        </div>
-        <div style="width: 120px; height: 60px; background-color: #d92a1a; border-radius: 8px; color: white; display: flex; justify-content: center; align-items: center; font-weight: bold; font-size: 14px;">
+        <div class="ad-highlight">
             Web pentest
         </div>
     </section>
+
+    <!-- Additional advertisement banner -->
+    <section class="advertisement-banner">
+        <div class="ad-text">
+            <strong>Обучение Python для начинающих</strong><br/>
+            <a href="https://python-course.example.com" target="_blank" rel="noopener noreferrer">python-course.example.com</a> <span>РЕКЛАМА · 12+</span>
+        </div>
+        <div class="ad-highlight">
+            Python Course
+        </div>
+    </section>
+
+    <!-- Bottom bar -->
+    <footer class="bottom-bar">
+        <div class="alisa-search">
+            Алиса в Браузере
+        </div>
+    </footer>
 </body>
 </html>

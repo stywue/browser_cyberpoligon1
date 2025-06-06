@@ -9,6 +9,7 @@
 <body>
     <header class="search-header">
         <form action="/search" method="GET" class="search-form">
+            <!-- Removed empty transparent buttons for voice and camera -->
             <button type="submit" class="yandex-logo" aria-label="Yandex"></button>
             <input
                 type="text"
@@ -20,9 +21,9 @@
             />
             <button type="button" class="clear-button" aria-label="Clear search input">×</button>
             <button type="submit" class="search-button">Найти</button>
-            <button type="button" class="voice-search" aria-label="Voice search"></button>
-            <button type="button" class="camera-search" aria-label="Camera search"></button>
         </form>
+        <!-- Removed navigation tabs as per user request -->
+        <!--
         <nav class="search-tabs" role="navigation" aria-label="Search categories">
             <ul>
                 <li class="active"><a href="#">поиск</a></li>
@@ -37,6 +38,7 @@
                 <li><a href="#">все</a></li>
             </ul>
         </nav>
+        -->
     </header>
 
     <main class="content-container">
@@ -60,5 +62,16 @@
             <p>Ничего не найдено.</p>
         {% endif %}
     </main>
+
+    <!-- Additional advertisement banner -->
+    <section class="advertisement-banner">
+        <div class="ad-text">
+            <strong>Специальное предложение: Курсы по кибербезопасности</strong><br/>
+            <a href="https://cybersecurity.example.com" target="_blank" rel="noopener noreferrer">cybersecurity.example.com</a> <span>РЕКЛАМА · 18+</span>
+        </div>
+        <div class="ad-highlight">
+            Cybersecurity
+        </div>
+    </section>
 </body>
 </html>
